@@ -1,0 +1,409 @@
+/* Basic reset and global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+  }
+  
+  .container {
+    flex: 1;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  /* Footer styles */
+  footer {
+    background: #3a3a3a;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    margin-top: auto; 
+  }
+  
+  a {
+    text-decoration: none;
+    color: #1a73e8;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #174ea6;
+  }
+  
+  /* Header styles */
+  header {
+    background: #3a3a3a;
+    color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  
+  /* Navigation styles */
+  nav {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .nav-link {
+    color: #fff;
+    padding: 10px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  /* Main content styles */
+  main {
+    padding: 40px 0;
+    flex: 1 0 auto; 
+  }
+  
+  /* Title styles */
+  .dashboard-title,
+  .section-title,
+  .form-title {
+    text-align: center;
+    margin: 30px 0;
+    color: #333;
+    font-weight: 500;
+    font-size: 2rem;
+  }
+  
+  /* Action button styles */
+  .action-links,
+  .add-file-form {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .action-button,
+  .add-file-button,
+  .remove-file-button,
+  .delete-folder-button,
+  .delete-button,
+  .submit-button {
+    background: #1a73e8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 10px;
+    max-width: 200px;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .action-button:hover,
+  .add-file-button:hover,
+  .remove-file-button:hover,
+  .delete-folder-button:hover,
+  .delete-button:hover,
+  .submit-button:hover {
+    background: #1565c0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Folder styles */
+  .folder {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 20px auto;
+    padding: 25px;
+    max-width: 700px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .folder:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .folder > form {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* File list styles */
+  .file-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .file-item {
+    max-width: 400px;
+    margin: 15px auto;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .file-item:hover {
+    background: #f0f0f0;
+    transform: scale(1.02);
+  }
+  
+  .btn-cont { 
+    display: flex;
+    gap: 15px;
+  }
+  /* Empty states */
+  .no-files,
+  .no-folders {
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+    margin: 30px 0;
+  }
+  
+  /* Success or Error Message */
+  .message {
+    position: fixed;      
+    top: 20px;             
+    left: 50%;    
+    top: 50%;    
+    transform: translateX(-50%);           
+    padding: 10px;         
+    border-radius: 5px;    
+    z-index: 10;            
+    opacity: 1;            
+    transition: opacity 0.5s; 
+    text-align: center;
+    color: #d32f2f; 
+    margin-top: 20px;
+    padding: 10px;
+    background: #ffebee; 
+    border-radius: 5px;
+  }
+
+    .fade-message {
+    opacity: 1; 
+  }
+
+  /* Form styles */
+  .create-folder-form,
+  .login-form,
+  .signup-form {
+    max-width: 450px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Label styles */
+  .form-label {
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  /* Input styles */
+  .folder-input,
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .folder-input:focus,
+  .form-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  }
+
+  /* File Upload Form Styles */
+.file-upload-form {
+    max-width: 450px;
+    margin: 30px auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .file-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .file-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    background: #1a73e8;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    width: 100%;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .submit-button:hover {
+    background: #1565c0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .nav-link {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    
+    .action-button,
+    .add-file-button,
+    .remove-file-button,
+    .delete-folder-button,
+    .delete-button,
+    .submit-button {
+      padding: 10px 15px;
+      width: 90%;
+      font-size: 0.9rem;
+    }
+    
+    .folder,
+    .file-upload-form {
+      padding: 20px;
+    }
+    
+    .dashboard-title,
+    .section-title,
+    .form-title {
+      font-size: 1.8rem;
+    }
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .folder, .file-item, .create-folder-form, .login-form, .signup-form {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+/* General container style */
+.home-content {
+    max-width: 800px;  
+    margin: 30px auto; 
+    padding: 30px;    
+    background-color: #ffffff; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    animation: fadeIn 0.5s ease-out; 
+}
+
+/* Heading styles */
+.home-content h2 {
+    color: #333; 
+    font-size: 2.2em; 
+    margin-bottom: 15px; 
+    text-align: center; 
+    font-weight: 500;
+}
+
+/* Paragraph styles */
+.home-content p {
+    color: #555; 
+    line-height: 1.6;
+    margin-bottom: 15px; 
+    text-align: center; 
+}
+
+/* List styles */
+.home-content ul {
+    list-style-type: disc; 
+    padding-left: 20px; 
+}
+
+/* List item styles */
+.home-content ul li {
+    margin-bottom: 5px; 
+    color: #555; 
+}
+
+/* Adjusting styles for better visibility */
+.home-content ul li:hover {
+    color: #1a73e8;
+}

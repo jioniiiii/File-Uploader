@@ -1,0 +1,95 @@
+<% if (locals.message) { %>
+    <p class="message fade-message"><%= message %></p>
+<% } %>
+
+<h1 class="dashboard-title">Dashboard</h1>
+
+<div class="action-links">
+    <a href="/upload" class="action-button">Upload File</a>
+    <a href="/create-folder" class="action-button">Create Folder</a>
+</div>
+
+<h1 class="section-title">Folders and Files</h1>
+
+<% if (folders && folders.length > 0) { %>
+    <% folders.forEach(folder => { %>
+        <div class="folder">
+            <form action="/add-file-to-folder" method="POST" enctype="multipart/form-data" class="add-file-form">
+                <input type="file" name="file" required />
+                <input type="hidden" name="folderId" value="<%= folder.id %>">
+                <button type="submit" class="add-file-button">Add File</button>
+            </form>
+            <h2 class="folder-name">Folder: <%= folder.name %></h2>
+            <p class="folder-date">Created At: <%= folder.createdAt.toLocaleDateString() %></p>
+
+            <% if (folder.files && folder.files.length > 0) { %>
+                <ul class="file-list">
+                    <% folder.files.forEach(file => { %>
+                        <li class="file-item">
+                            <strong>File Name:</strong> <%= file.name %> <br>
+                            <strong>Uploaded At:</strong> <%= file.createdAt.toLocaleDateString() %> <br>
+                            <div class="btn-cont">
+                                <form action="/remove-file-from-folder" method="POST" class="remove-file-form">
+                                    <input type="hidden" name="fileId" value="<%= file.id %>">
+                                    <button type="submit" class="remove-file-button">Remove from Folder</button>
+                                </form>
+                                <form action="/download-file/<%= file.id %>" method="GET" class="delete-file-form">
+                                    <button type="submit" class="delete-button">Download</button>
+                                </form>
+                            </div>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } else { %>
+                <p class="no-files">No files in this folder.</p>
+            <% } %>
+            <div class="btn-cont">
+                <form action="/delete-folder/<%= folder.id %>?" method="POST" class="delete-folder-form">
+                    <button type="submit" class="delete-folder-button">Delete Folder</button>
+                </form>
+                <form action="/download-folder/<%= folder.id %>" method="GET" class="delete-file-form">
+                    <button type="submit" class="delete-button">Download</button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+<% } else { %>
+    <p class="no-folders">No folders found.</p>
+<% } %>
+
+<h1 class="section-title">Files without a Folder</h1>
+
+<% if (filesWithoutFolder && filesWithoutFolder.length > 0) { %>
+    <ul class="file-list">
+        <% filesWithoutFolder.forEach(file => { %>
+            <li class="file-item">
+                <strong>File Name:</strong> <%= file.name %> <br>
+                <strong>Uploaded At:</strong> <%= file.createdAt.toLocaleDateString() %> <br>
+                <div class="btn-cont">
+                    <form action="/delete-file/<%= file.id %>" method="POST" class="delete-file-form">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+                    <form action="/download-file/<%= file.id %>" method="GET" class="delete-file-form">
+                        <button type="submit" class="delete-button">Download</button>
+                    </form>
+                </div>
+            </li>
+        <% }) %>
+       
+    </ul>
+<% } else { %>
+    <p class="no-files">No files without a folder.</p>
+<% } %>
+
+<script>
+    const messageElement = document.querySelector('.fade-message');
+    if (messageElement) {
+        setTimeout(() => {
+            messageElement.style.transition = "opacity 0.5s ease"; 
+            messageElement.style.opacity = 0; 
+            setTimeout(() => {
+                messageElement.remove(); 
+            }, 500);
+        }, 3000); 
+    }
+</script>
